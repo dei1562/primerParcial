@@ -6,13 +6,68 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>anemia</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Anemia</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <form novalidate (ngSubmit)="onSubmit(anemiaF)" [formGroup]="anemiaF">
+        <ion-item>
+            <ion-label>Nombre</ion-label>
+            <ion-input type="text" placeholder="" [(ngModel)]="nombre" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(anemiaF.get('nombre').hasError('required') || anemiaF.get('nombre').hasError('minlength')) && anemiaF.get('nombre').touched">
+            <div class="error" *ngIf="anemiaF.get('nombre').hasError('required') && anemiaF.get('nombre').touched">Por favor ingrese el nombre.</div>
+            <div class="error" *ngIf="anemiaF.get('nombre').hasError('minlength') && anemiaF.get('nombre').touched">Minimo 4 caracteres.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Cedula</ion-label>
+            <ion-input type="number" placeholder="" [(ngModel)]="cedula" formControlName="cedula"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(anemiaF.get('cedula').hasError('required') || anemiaF.get('cedula').hasError('min')) && anemiaF.get('cedula').touched">
+            <div class="error" *ngIf="anemiaF.get('cedula').hasError('required') && anemiaF.get('cedula').touched">Por favor ingrese la cedula.</div>
+            <div class="error" *ngIf="anemiaF.get('cedula').hasError('min') && anemiaF.get('cedula').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Nivel de Hemoglobina</ion-label>
+            <ion-input type="number" placeholder="" [(ngModel)]="nivel_hemoglobina" formControlName="nivel_hemoglobina" step="0.1"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(anemiaF.get('nivel_hemoglobina').hasError('required') || anemiaF.get('nivel_hemoglobina').hasError('min')) && anemiaF.get('nivel_hemoglobina').touched">
+            <div class="error" *ngIf="anemiaF.get('nivel_hemoglobina').hasError('required') && anemiaF.get('nivel_hemoglobina').touched">Por favor ingrese el nivel_hemoglobina.</div>
+            <div class="error" *ngIf="anemiaF.get('nivel_hemoglobina').hasError('min') && anemiaF.get('nivel_hemoglobina').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Correo</ion-label>
+            <ion-input type="email" placeholder="" [(ngModel)]="correo" formControlName="correo"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(anemiaF.get('correo').hasError('required') || anemiaF.get('correo').hasError('email')) && anemiaF.get('correo').touched">
+            <div class="error" *ngIf="anemiaF.get('correo').hasError('required') && anemiaF.get('correo').touched">Por favor ingrese el correo.</div>
+            <div class="error" *ngIf="anemiaF.get('correo').hasError('email') && anemiaF.get('correo').touched">Ingrese una dirección de correo valida.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Fecha de Nacimiento</ion-label>
+            <ion-datetime displayFormat="YYYY/MM/DD" pickerFormat="YYYY MM DD" [max]="today" [(ngModel)]="fecha_nacimiento" formControlName="fecha_nacimiento"></ion-datetime>
+        </ion-item>
+        <ion-item no-lines *ngIf="(anemiaF.get('fecha_nacimiento').hasError('required') || anemiaF.get('fecha_nacimiento').hasError('min')) && anemiaF.get('fecha_nacimiento').touched">
+            <div class="error" *ngIf="anemiaF.get('fecha_nacimiento').hasError('required') && anemiaF.get('fecha_nacimiento').touched">Por favor ingrese la fecha_nacimiento.</div>
+            <div class="error" *ngIf="anemiaF.get('fecha_nacimiento').hasError('min') && anemiaF.get('fecha_nacimiento').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Sexo</ion-label>
+            <ion-select [(ngModel)]="sexo" formControlName="sexo">
+                <ion-option value="m">Mujer</ion-option>
+                <ion-option value="h">Hombre</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item no-lines *ngIf="(anemiaF.get('sexo').hasError('required')) && anemiaF.get('sexo').touched">
+            <div class="error" *ngIf="anemiaF.get('sexo').hasError('required') && anemiaF.get('sexo').touched">Por favor seleccione el sexo.</div>
+        </ion-item>
 
+        <ion-item>
+            <button ion-button color="primary" block>Verificar Condición</button>
+        </ion-item>
+    </form>
 </ion-content>

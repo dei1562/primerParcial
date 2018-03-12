@@ -1,17 +1,45 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>HemoHearth</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content class="cards-bg">
+    <ion-card>
+        <ion-card-content>
+            <div><img src="assets/imgs/img1.jpg" /></div>
+            <ion-card-title>
+                Nosotros
+            </ion-card-title>
+            <p>
+                Somos un centro médico especializado enfocados en la prevención y el tratamiento de enfermedardes cardiovasculares y de anemia.
+            </p>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+        <ion-card-content>
+            <div><img src="assets/imgs/img2.jpg" /></div>
+            <ion-card-title>
+                Servicios
+            </ion-card-title>
+            <p>
+                Contamos con dos excelentes aplicaciones las cuales poseen las siguientes funcionalidades:
+            </p>
+            <p>
+                <strong>Gasto Energetico Total (GET),</strong> te ayudara a tener un cotrol sobre el gasto enertico que realiza una persona durante el día.
+            </p>
+            <p>
+                <strong>Anemia,</strong> con esta aplicacíon podras conocer una ves ingresada la información si posee anemia o no.
+            </p>
+            <ion-row no-padding>
+                <ion-col>
+                    <button ion-button clear small color="danger" icon-start>
+                  <ion-icon name="share-alt"></ion-icon>
+                  Compartir
+                </button>
+                </ion-col>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

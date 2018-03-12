@@ -5,35 +5,86 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
     <ion-navbar>
         <ion-title>Gasto Energetico Total (GET)</ion-title>
     </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
-    <ion-item>
-        <ion-input type="text" placeholder="Nombre"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-input type="number" placeholder="Cedula"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-input type="number" placeholder="Peso (kg)"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-input type="number" placeholder="Estatura (cm)"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-input type="number" placeholder="Edad"></ion-input>
-    </ion-item>
-    <ion-item>
-        <ion-label>Sexo</ion-label>
-        <ion-select [(ngModel)]="gender">
-            <ion-option value="f">Femenino</ion-option>
-            <ion-option value="m">Masculino</ion-option>
-        </ion-select>
-    </ion-item>
+    <form novalidate (ngSubmit)="onSubmit(gastoET)" [formGroup]="gastoET">
+        <ion-item>
+            <ion-label>Nombre</ion-label>
+            <ion-input type="text" placeholder="" [(ngModel)]="nombre" formControlName="nombre"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('nombre').hasError('required') || gastoET.get('nombre').hasError('minlength')) && gastoET.get('nombre').touched">
+            <div class="error" *ngIf="gastoET.get('nombre').hasError('required') && gastoET.get('nombre').touched">Por favor ingrese el nombre.</div>
+            <div class="error" *ngIf="gastoET.get('nombre').hasError('minlength') && gastoET.get('nombre').touched">Minimo 4 caracteres.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Cedula</ion-label>
+            <ion-input type="number" placeholder="" [(ngModel)]="cedula" formControlName="cedula"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('cedula').hasError('required') || gastoET.get('cedula').hasError('min')) && gastoET.get('cedula').touched">
+            <div class="error" *ngIf="gastoET.get('cedula').hasError('required') && gastoET.get('cedula').touched">Por favor ingrese la cedula.</div>
+            <div class="error" *ngIf="gastoET.get('cedula').hasError('min') && gastoET.get('cedula').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Peso (kg)</ion-label>
+            <ion-input type="number" placeholder="" [(ngModel)]="peso" formControlName="peso"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('peso').hasError('required') || gastoET.get('peso').hasError('min')) && gastoET.get('peso').touched">
+            <div class="error" *ngIf="gastoET.get('peso').hasError('required') && gastoET.get('peso').touched">Por favor ingrese el peso.</div>
+            <div class="error" *ngIf="gastoET.get('peso').hasError('min') && gastoET.get('peso').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Estatura (cm)</ion-label>
+            <ion-input type="number" placeholder="" [(ngModel)]="estatura" formControlName="estatura"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('estatura').hasError('required') || gastoET.get('estatura').hasError('min')) && gastoET.get('estatura').touched">
+            <div class="error" *ngIf="gastoET.get('estatura').hasError('required') && gastoET.get('estatura').touched">Por favor ingrese la estatura.</div>
+            <div class="error" *ngIf="gastoET.get('estatura').hasError('min') && gastoET.get('estatura').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Edad</ion-label>
+            <ion-input type="number" placeholder="" [(ngModel)]="edad" formControlName="edad"></ion-input>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('edad').hasError('required') || gastoET.get('edad').hasError('min')) && gastoET.get('edad').touched">
+            <div class="error" *ngIf="gastoET.get('edad').hasError('required') && gastoET.get('edad').touched">Por favor ingrese la edad.</div>
+            <div class="error" *ngIf="gastoET.get('edad').hasError('min') && gastoET.get('edad').touched">El valor ingresado debe ser mayor a 0.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Sexo</ion-label>
+            <ion-select [(ngModel)]="sexo" formControlName="sexo">
+                <ion-option value="m">Mujer</ion-option>
+                <ion-option value="h">Hombre</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('sexo').hasError('required')) && gastoET.get('sexo').touched">
+            <div class="error" *ngIf="gastoET.get('sexo').hasError('required') && gastoET.get('sexo').touched">Por favor seleccione el sexo.</div>
+        </ion-item>
+        <ion-item>
+            <ion-label>Actividad Fisica</ion-label>
+            <ion-select [(ngModel)]="actividad_fisica" formControlName="actividad_fisica">
+                <ion-option value="1">Sedentario</ion-option>
+                <ion-option value="2">Actividad Ligera</ion-option>
+                <ion-option value="3">Actividad Moderada</ion-option>
+                <ion-option value="4">Actividad Intensa</ion-option>
+                <ion-option value="5">Actividad Muy Intensa</ion-option>
+                <ion-option value="6">Actividad Dinamica Especifica</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item no-lines *ngIf="(gastoET.get('actividad_fisica').hasError('required') || gastoET.get('actividad_fisica').hasError('minlength')) && gastoET.get('actividad_fisica').touched">
+            <div class="error" *ngIf="gastoET.get('actividad_fisica').hasError('required') && gastoET.get('actividad_fisica').touched">Por favor seleccione la actividad fisica.</div>
+        </ion-item>
+
+        <ion-card *ngIf="gasto_energetico_total">
+            <ion-card-content>
+                <p style="text-align: center; font-weight:bold; font-size: 1.2em;">Gasto Energetico Total: {{ gasto_energetico_total }} Kcal/día</p>
+            </ion-card-content>
+        </ion-card>
+
+        <ion-item>
+            <button ion-button color="primary" block>Calcular Gasto Energetico Total</button>
+        </ion-item>
+    </form>
 </ion-content>
